@@ -1,6 +1,6 @@
 //Declarative
 
-node {
+pipeline {
 	    agent any
 		stages {
 
