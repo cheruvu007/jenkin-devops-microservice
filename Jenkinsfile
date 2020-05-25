@@ -32,7 +32,7 @@ pipeline {
 			always {
 				echo 'I am awesome. I run always'
 			}
-			sucess {
+			success {
 				echo 'I run when are success'
 			}
 			failure {
