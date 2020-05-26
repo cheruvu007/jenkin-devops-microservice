@@ -49,6 +49,34 @@ pipeline {
 				}
 			}
 
+		    stage ('Package'){
+				steps{
+						 
+						sh "mvn package -DskipTests"
+				}
+			}
+
+			stage ('Build Docker Image'){
+				steps{
+						 
+						//"docker build -t cheruvu007/currency-exchange:$env.BUILD_TAG"
+						script {
+							dockerImage = docker.build("cheruvu007/currency-exchange:${env.BUILD_TAG}")
+						}
+				}
+			}
+
+			stage ('Push Docker Image'){
+				steps{
+						 
+						script {
+							docker.withRegistry('','dockerhub'){							
+								dockerImage.push();
+								dockerImage.push('latest');
+							}
+						}
+				}
+			}
 
 		} 
 		post {
